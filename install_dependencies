@@ -208,7 +208,7 @@ else
     BOOT_CONFIG="/boot/config.txt"
 fi
 echo -e "Enable I2C (config: $BOOT_CONFIG) \n"
-egrep -v "^#|^$" $BOOT_CONFIG > config.txt.temp  # pick up all uncomment configrations
+egrep -v "^#|^$" $BOOT_CONFIG > config.txt.temp  # pick up all uncommented configurations
 if grep -q 'dtparam=i2c_arm=on' config.txt.temp; then  # whether i2c_arm in uncomment configrations or not
     echo -e '    Seem i2c_arm parameter already set, skip this step \n'
 else
