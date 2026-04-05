@@ -126,6 +126,13 @@ else
     fi
 fi
 
+echo -e "\nInstalling python3-rpi-lgpio (GPIO library for Bookworm/Trixie) \n"
+if sudo apt install python3-rpi-lgpio -y; then
+    echo -e "    Successfully installed python3-rpi-lgpio \n"
+else
+    echo -e "    python3-rpi-lgpio not available on this OS, skipping \n"
+fi
+
 echo -e "\nInstalling python3-opencv \n"
 if sudo apt-get install python3-opencv -y; then
     echo -e "    Successfully installed python-opencv \n"
@@ -194,13 +201,18 @@ echo -e "complete\n"
 ###################################
 # Enable I2C1 #
 ###################################
-# Add lines to /boot/config.txt
-echo -e "Enalbe I2C \n"
-egrep -v "^#|^$" /boot/config.txt > config.txt.temp  # pick up all uncomment configrations
+# Add lines to boot config (path changed in Bookworm/Trixie)
+if [ -f "/boot/firmware/config.txt" ]; then
+    BOOT_CONFIG="/boot/firmware/config.txt"
+else
+    BOOT_CONFIG="/boot/config.txt"
+fi
+echo -e "Enable I2C (config: $BOOT_CONFIG) \n"
+egrep -v "^#|^$" $BOOT_CONFIG > config.txt.temp  # pick up all uncommented configurations
 if grep -q 'dtparam=i2c_arm=on' config.txt.temp; then  # whether i2c_arm in uncomment configrations or not
     echo -e '    Seem i2c_arm parameter already set, skip this step \n'
 else
-    echo -e '    dtparam=i2c_arm=on \n' >> /boot/config.txt
+    echo -e '    dtparam=i2c_arm=on \n' >> $BOOT_CONFIG
 fi
 rm config.txt.temp
 echo -e "complete\n"
