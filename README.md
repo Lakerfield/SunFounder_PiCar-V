@@ -1,3 +1,8 @@
+# WORK IN PROGRESS
+Attempt to make it work on Debian GNU/Linux 13 (trixie) 64-bit
+
+------
+
 ## SunFounder Smart Video Car Kit for Raspberry Pi
 SunFounder Smart Video Car Kit V2.0
 
