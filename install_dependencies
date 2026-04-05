@@ -167,10 +167,10 @@ fi
 # Install RPi Car V2 Module
 ###################################
 
-#echo -e "Cloning repo \n"
-#cd ../
-#git clone --recursive https://github.com/lakerfield/SunFounder_PiCar.git
-#cd SunFounder_PiCar
+echo -e "Cloning repo \n"
+cd ../
+git clone --recursive https://github.com/lakerfield/SunFounder_PiCar.git
+cd SunFounder_PiCar
 echo -e "    Installing PiCar module \n"
 sudo python setup.py install
 sudo python3 setup.py install
